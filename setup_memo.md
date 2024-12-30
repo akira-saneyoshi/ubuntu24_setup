@@ -1,21 +1,23 @@
-ホストOS：Windows11
-WSL2-OS：Ubuntu24 LTS
+* ホスト情報
+    * ホストOS：Windows11
+    * WSL2-OS：Ubuntu24 LTS
+* 参考ドキュメント
+    * セットアップ記事
+        * ※後日記載
+    * nvm
+        * https://github.com/nvm-sh/nvm
+    * golang
+        * https://github.com/go-nv/goenv
 
 ```zsh
 sudo apt update
 
 sudo apt upgrade
-```
 
-```zsh
 sudo apt install zsh
-```
 
-```zsh
 zsh --version
-```
 
-```zsh
 chsh -s $(which zsh)
 ```
 
@@ -28,6 +30,8 @@ sudo apt install build-essential pkg-config libssl-dev cmake
 ```zsh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+
+※ターミナル再起動する。
 
 ```zsh
 rustup -V
@@ -47,11 +51,9 @@ eval "$(starship init zsh)"
 
 ```zsh
 starship config
-```
 
 または、
 
-```zsh
 mkdir -p ~/.config && touch ~/.config/starship.toml
 ```
 
@@ -150,6 +152,8 @@ inline = 'type direnv &>/dev/null && eval "$(direnv hook zsh)"'
 ```
 
 ```zsh
+sudo vi ~/.config/starship.toml
+
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
@@ -358,5 +362,35 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$PATH:/usr/local/go/bin"
+export GOENV_ROOT=$HOME/.goenv
+export PATH=$GOENV_ROOT/bin:$PATH
+eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+
+export GOPATH=$HOME/go
+```
+
+```zsh
+git clone https://github.com/syndbg/goenv.git ~/.goenv
+
+sudo vim ~/.zshrc
+
+export GOENV_ROOT=$HOME/.goenv
+export PATH=$GOENV_ROOT/bin:$PATH
+eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+
+export GOPATH=$HOME/go
+```
+
+```zsh
+exec $SHELL
+
+goenv install -l
+
+goenv install 1.23.4
+
+goenv global 1.23.4
 ```
