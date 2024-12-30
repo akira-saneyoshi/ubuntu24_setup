@@ -24,7 +24,7 @@ chsh -s $(which zsh)
 ※ターミナル再起動する。
 
 ```zsh
-sudo apt install build-essential pkg-config libssl-dev cmake
+sudo apt install build-essential pkg-config libssl-dev cmake unzip
 ```
 
 ```zsh
@@ -393,4 +393,16 @@ goenv install -l
 goenv install 1.23.4
 
 goenv global 1.23.4
+```
+
+```zsh
+nvm ls-remote
+
+nvm install v22.12.0
+nvm use v22.12.0
+node -v
+```
+
+```zsh
+curl -fsSL https://bun.sh/install | bash
 ```
